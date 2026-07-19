@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base Reset & Custom Layout */
+html, body, #root {
+  height: 100%;
+  background-color: #070B14 !important;
+  color: #F8FAFC !important;
+  font-family: 'Inter', -apple-system, sans-serif !important;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #070B14;
+}
+::-webkit-scrollbar-thumb {
+  background: #1B2940;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4F8CFF;
+}
+
+/* Global Theme Styles & Overrides */
+
+/* Cards - Redirect bg-white to dark elevated cards with soft borders */
+.bg-white, [class*="bg-white"] {
+  background-color: #162133 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Border overlays */
+.border, .border-slate-200, .border-slate-100, .border-gray-200, .border-gray-100, .border-zinc-200, .border-t, .border-b, .border-r, .border-l {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Inputs & Forms */
+input, select, textarea {
+  background-color: #101827 !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  color: #F8FAFC !important;
+  border-radius: 0.75rem !important;
+  padding: 0.625rem 0.875rem !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none !important;
+  border-color: #4F8CFF !important;
+  box-shadow: 0 0 0 2px rgba(79, 140, 255, 0.25) !important;
+}
+
+/* Text overrides */
+.text-slate-900, .text-gray-900, .text-zinc-900, .text-black {
+  color: #F8FAFC !important;
+}
+.text-slate-800, .text-gray-800, .text-zinc-800 {
+  color: #F1F5F9 !important;
+}
+.text-slate-700, .text-gray-700, .text-zinc-700 {
+  color: #E2E8F0 !important;
+}
+.text-slate-600, .text-gray-600, .text-zinc-600 {
+  color: #94A3B8 !important;
+}
+.text-slate-500, .text-gray-500, .text-zinc-500 {
+  color: #94A3B8 !important;
+}
+.text-slate-400, .text-gray-400, .text-zinc-400 {
+  color: #64748B !important;
+}
+
+/* Interactive Brand items & Buttons */
+.bg-brand-600, .bg-indigo-600, .bg-blue-600, button[type="submit"] {
+  background: linear-gradient(135deg, #4F8CFF 0%, #7B61FF 100%) !important;
+  border: none !important;
+  color: #FFFFFF !important;
+  font-weight: 600 !important;
+  border-radius: 0.75rem !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+.bg-brand-600:hover, .bg-indigo-600:hover, .bg-blue-600:hover, button[type="submit"]:hover {
+  transform: translateY(-1.5px) !important;
+  box-shadow: 0 4px 20px rgba(79, 140, 255, 0.4) !important;
+  background: linear-gradient(135deg, #5e95ff 0%, #8c75ff 100%) !important;
+}
+.bg-brand-600:active, .bg-indigo-600:active, .bg-blue-600:active, button[type="submit"]:active {
+  transform: translateY(0.5px) !important;
+}
+.bg-brand-50, .bg-indigo-50, .bg-blue-50 {
+  background-color: rgba(79, 140, 255, 0.1) !important;
+}
+
+/* Sidebar and Navigation */
+aside {
+  background-color: #101827 !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+aside a {
+  border-radius: 0.75rem !important;
+  padding: 0.625rem 1rem !important;
+  margin-bottom: 3px;
+  color: #94A3B8 !important;
+  transition: all 0.2s ease !important;
+}
+aside a:hover {
+  background-color: rgba(255, 255, 255, 0.03) !important;
+  color: #F8FAFC !important;
+}
+aside a.active {
+  background: linear-gradient(135deg, rgba(79, 140, 255, 0.12) 0%, rgba(123, 97, 255, 0.12) 100%) !important;
+  color: #4F8CFF !important;
+  box-shadow: inset 0 0 10px rgba(79, 140, 255, 0.08);
+  border-left: 3px solid #4F8CFF !important;
+  font-weight: 600;
+}
+
+/* Badge styles */
+.bg-green-100 {
+  background-color: rgba(34, 197, 94, 0.1) !important;
+  color: #22C55E !important;
+  border: 1px solid rgba(34, 197, 94, 0.2) !important;
+}
+.bg-red-100 {
+  background-color: rgba(239, 68, 68, 0.1) !important;
+  color: #EF4444 !important;
+  border: 1px solid rgba(239, 68, 68, 0.2) !important;
+}
+.bg-amber-100, .bg-yellow-100 {
+  background-color: rgba(245, 158, 11, 0.1) !important;
+  color: #F59E0B !important;
+  border: 1px solid rgba(245, 158, 11, 0.2) !important;
+}
+.bg-blue-100 {
+  background-color: rgba(79, 140, 255, 0.1) !important;
+  color: #4F8CFF !important;
+  border: 1px solid rgba(79, 140, 255, 0.2) !important;
+}
+.bg-purple-100 {
+  background-color: rgba(123, 97, 255, 0.1) !important;
+  color: #7B61FF !important;
+  border: 1px solid rgba(123, 97, 255, 0.2) !important;
+}
+
+/* Cards Hover effects & UI animations */
+.hover-lift, .rounded-2xl, .rounded-xl {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+.hover-lift:hover, .rounded-2xl:hover, .rounded-xl:hover {
+  border-color: rgba(79, 140, 255, 0.2) !important;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+main > div {
+  animation: fadeIn 0.35s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Glassmorphism class helper */
+.glass {
+  background: rgba(22, 33, 51, 0.65) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Table styling override */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th {
+  background-color: #101827 !important;
+  color: #94A3B8 !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.05em !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+tr:hover td {
+  background-color: rgba(255, 255, 255, 0.01) !important;
+}
+
+/* Premium Animations & Loading States */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer-load {
+  background: linear-gradient(90deg, #111827 25%, #1f2937 50%, #111827 75%) !important;
+  background-size: 200% 100% !important;
+  animation: shimmer 1.5s infinite linear !important;
+}
+
+.hover-glow {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+.hover-glow:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 30px -10px rgba(79, 140, 255, 0.3) !important;
+  border-color: rgba(79, 140, 255, 0.3) !important;
+}
+
+.glassmorphism {
+  background: rgba(17, 24, 39, 0.7) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Markdown and Chat style helpers */
+.markdown-body pre {
+  background-color: #0b1220 !important;
+  padding: 1rem !important;
+  border-radius: 0.75rem !important;
+  overflow-x: auto !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.markdown-body code {
+  font-family: 'Courier New', Courier, monospace !important;
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  padding: 0.2rem 0.4rem !important;
+  border-radius: 0.25rem !important;
+  font-size: 85% !important;
+}
+
+.markdown-body ul {
+  list-style-type: disc !important;
+  padding-left: 1.5rem !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.markdown-body ol {
+  list-style-type: decimal !important;
+  padding-left: 1.5rem !important;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.markdown-body li {
+  margin-top: 0.25rem !important;
+  margin-bottom: 0.25rem !important;
+}
+
+.markdown-body p {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+  line-height: 1.6 !important;
+}
+
+/* Chat bubble styling */
+.chat-bubble-model {
+  background-color: #1e293b !important;
+  color: #f8fafc !important;
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.chat-bubble-user {
+  background: linear-gradient(135deg, #4F8CFF 0%, #7C3AED 100%) !important;
+  color: #ffffff !important;
+}
+
+/* Card glass glow style */
+.glow-purple:hover {
+  box-shadow: 0 10px 30px -10px rgba(124, 58, 237, 0.3) !important;
+  border-color: rgba(124, 58, 237, 0.3) !important;
+}
+
+.glow-emerald:hover {
+  box-shadow: 0 10px 30px -10px rgba(34, 197, 94, 0.3) !important;
+  border-color: rgba(34, 197, 94, 0.3) !important;
+}
+

@@ -1,0 +1,86 @@
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
+
+const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
+const noteRoutes = require('./routes/noteRoutes');
+const pyqRoutes = require('./routes/pyqRoutes');
+const placementRoutes = require('./routes/placementRoutes');
+const eventRoutes = require('./routes/eventRoutes');
+const notificationRoutes = require('./routes/notificationRoutes');
+const complaintRoutes = require('./routes/complaintRoutes');
+const supportTicketRoutes = require('./routes/supportTicketRoutes');
+const aiRoutes = require('./routes/aiRoutes');
+const analyticsRoutes = require('./routes/analyticsRoutes');
+const attendanceRoutes = require('./routes/attendanceRoutes');
+const assignmentRoutes = require('./routes/assignmentRoutes');
+const timetableRoutes = require('./routes/timetableRoutes');
+const departmentRoutes = require('./routes/departmentRoutes');
+const subjectRoutes = require('./routes/subjectRoutes');
+const adminRoutes = require('./routes/adminRoutes');
+const resumeRoutes = require('./routes/resumeRoutes');
+const { globalErrorHandler, notFoundHandler } = require('./middleware/errorHandler');
+
+const app = express();
+
+app.use(helmet());
+app.use(
+  cors({
+    origin: [process.env.CLIENT_URL, 'http://localhost:5173', 'http://localhost:5174'].filter(Boolean),
+    credentials: true,
+  })
+);
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use('/uploads', express.static(require('path').join(__dirname, 'uploads')));
+
+if (process.env.NODE_ENV !== 'test') {
+  app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
+}
+
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ success: true, message: 'CampusConnect API is healthy.', timestamp: new Date().toISOString() });
+});
+
+// ---- Phase 1: Authentication ----
+app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes);
+
+// ---- Phase 2: Notes + PYQs ----
+app.use('/api/notes', noteRoutes);
+app.use('/api/pyqs', pyqRoutes);
+app.use('/api/academic', require('./routes/academicRoutes'));
+
+// ---- Phase 3: Placements + Events ----
+app.use('/api/placements', placementRoutes);
+app.use('/api/events', eventRoutes);
+
+// ---- Phase 4: Notifications + Complaints + Support Tickets ----
+app.use('/api/notifications', notificationRoutes);
+app.use('/api/complaints', complaintRoutes);
+app.use('/api/support-tickets', supportTicketRoutes);
+
+// ---- Phase 5: AI Study Assistant ----
+app.use('/api/ai', aiRoutes);
+
+// ---- Phase 6: Analytics ----
+app.use('/api/analytics', analyticsRoutes);
+
+// ---- CampusConnect ERP Routes ----
+app.use('/api/attendance', attendanceRoutes);
+app.use('/api/assignments', assignmentRoutes);
+app.use('/api/timetable', timetableRoutes);
+app.use('/api/departments', departmentRoutes);
+app.use('/api/subjects', subjectRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/resume', resumeRoutes);
+app.use('/api/fees', require('./routes/feeRoutes'));
+
+app.use(notFoundHandler);
+app.use(globalErrorHandler);
+
+module.exports = app;
