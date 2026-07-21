@@ -68,6 +68,32 @@ app.get('/api/health', (req, res) => {
   res.status(200).json({ success: true, message: 'CampusConnect API is healthy.', timestamp: new Date().toISOString() });
 });
 
+app.get('/api/gemini-check', async (req, res) => {
+  const apiKey = process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.trim() : '';
+  const modelName = process.env.GEMINI_MODEL || 'gemini-3.6-flash';
+  const prefix = apiKey ? `${apiKey.substring(0, 8)}...` : 'none';
+  try {
+    const { GoogleGenerativeAI } = require('@google/generative-ai');
+    const ai = new GoogleGenerativeAI(apiKey);
+    const model = ai.getGenerativeModel({ model: modelName });
+    const result = await model.generateContent('Say ok');
+    const text = (await result.response).text();
+    return res.status(200).json({
+      success: true,
+      apiKeyPrefix: prefix,
+      modelName,
+      response: text
+    });
+  } catch (err) {
+    return res.status(500).json({
+      success: false,
+      apiKeyPrefix: prefix,
+      modelName,
+      error: err.message
+    });
+  }
+});
+
 // ---- Phase 1: Authentication ----
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
