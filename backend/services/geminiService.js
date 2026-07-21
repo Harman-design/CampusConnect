@@ -3,6 +3,14 @@ const AcademicResource = require('../models/AcademicResource');
 const Note = require('../models/Note');
 const Pyq = require('../models/Pyq');
 
+function getGeminiModelName() {
+  const modelName = process.env.GEMINI_MODEL || 'gemini-3.6-flash';
+  if (['gemini-1.5-flash', 'gemini-2.0-flash', 'gemini-2.5-flash', 'gemini-3.5-flash'].includes(modelName)) {
+    return 'gemini-3.6-flash';
+  }
+  return modelName;
+}
+
 function isProgrammingSubject(subject) {
   const programmingKeywords = ['data structures', 'dbms', 'database', 'computer science', 'programming', 'code', 'operating systems', 'os', 'networks'];
   return programmingKeywords.some(keyword => subject.toLowerCase().includes(keyword));
@@ -274,7 +282,7 @@ async function generateAIContent(resourceId, operation) {
   }
 
   const geminiApiKey = process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.trim() : '';
-  const geminiModelName = process.env.GEMINI_MODEL || 'gemini-3.6-flash';
+  const geminiModelName = getGeminiModelName();
   const isMockKey = !geminiApiKey || geminiApiKey === 'your_gemini_api_key';
 
   if (!isMockKey) {
@@ -330,7 +338,7 @@ async function generateAIContent(resourceId, operation) {
 
 async function chat(history, message, systemPersona) {
   const geminiApiKey = process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.trim() : '';
-  const geminiModelName = process.env.GEMINI_MODEL || 'gemini-3.6-flash';
+  const geminiModelName = getGeminiModelName();
   const isMockKey = !geminiApiKey || geminiApiKey === 'your_gemini_api_key';
 
   if (!isMockKey) {
@@ -360,7 +368,7 @@ async function chat(history, message, systemPersona) {
 
 async function generateJSON(systemInstruction, userPrompt) {
   const geminiApiKey = process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.trim() : '';
-  const geminiModelName = process.env.GEMINI_MODEL || 'gemini-3.6-flash';
+  const geminiModelName = getGeminiModelName();
   const isMockKey = !geminiApiKey || geminiApiKey === 'your_gemini_api_key';
 
   if (!isMockKey) {
