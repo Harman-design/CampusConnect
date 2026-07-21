@@ -4,7 +4,14 @@ import axios from 'axios';
 import App from './App.jsx';
 import './index.css';
 
-const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api';
+const getFallbackApiUrl = () => {
+  if (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    return 'https://campusconnect-864s.onrender.com/api';
+  }
+  return 'http://localhost:5000/api';
+};
+
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || getFallbackApiUrl();
 const baseHost = apiBaseUrl.endsWith('/api') ? apiBaseUrl.slice(0, -4) : apiBaseUrl;
 axios.defaults.baseURL = baseHost;
 axios.defaults.withCredentials = true;

@@ -29,7 +29,20 @@ const app = express();
 app.use(helmet());
 app.use(
   cors({
-    origin: [process.env.CLIENT_URL, 'http://localhost:5173', 'http://localhost:5174'].filter(Boolean),
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      const allowedOrigins = [
+        process.env.CLIENT_URL,
+        'https://campus-connect-nine-eta.vercel.app',
+        'http://localhost:5173',
+        'http://localhost:5174',
+        'http://localhost:3000',
+      ].filter(Boolean);
+      if (allowedOrigins.includes(origin) || /^https:\/\/.*\.vercel\.app$/.test(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error('Not allowed by CORS'));
+    },
     credentials: true,
   })
 );

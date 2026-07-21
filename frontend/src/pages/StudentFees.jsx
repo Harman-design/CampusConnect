@@ -309,8 +309,7 @@ export default function StudentFees() {
                       <td className="px-6 py-3.5 text-slate-400">{pay.method}</td>
                       <td className="px-6 py-3.5 text-center">
                         {pay.status === 'Success' ? (
-                          <a
-                            href={`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/fees/receipt/${pay._id}`}
+                            href={`${import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || (typeof window !== 'undefined' && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' ? 'https://campusconnect-864s.onrender.com/api' : 'http://localhost:5000/api')}/fees/receipt/${pay._id}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-850 bg-[#0B1220] hover:bg-[#4F8CFF]/10 hover:text-[#4F8CFF] px-2.5 py-1.5 font-bold transition"
