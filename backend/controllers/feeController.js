@@ -5,7 +5,7 @@ const User = require('../models/User');
 const FeeStructure = require('../models/FeeStructure');
 const FeePayment = require('../models/FeePayment');
 const FineWaiver = require('../models/FineWaiver');
-const AppError = require('../utils/appError');
+const AppError = require('../utils/AppError');
 const catchAsync = require('../utils/catchAsync');
 const nodemailer = require('nodemailer');
 
