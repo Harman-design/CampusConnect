@@ -70,7 +70,8 @@ app.get('/api/health', (req, res) => {
 
 app.get('/api/gemini-check', async (req, res) => {
   const apiKey = process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.trim() : '';
-  const modelName = process.env.GEMINI_MODEL || 'gemini-3.6-flash';
+  const { getGeminiModelName } = require('./services/geminiService');
+  const modelName = getGeminiModelName();
   const prefix = apiKey ? `${apiKey.substring(0, 8)}...` : 'none';
   try {
     const { GoogleGenerativeAI } = require('@google/generative-ai');

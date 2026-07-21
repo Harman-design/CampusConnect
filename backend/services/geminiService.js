@@ -559,5 +559,6 @@ function getMockJSONResponse(systemInstruction, userPrompt) {
 module.exports = {
   generateAIContent,
   chat,
-  generateJSON
+  generateJSON,
+  getGeminiModelName
 };
