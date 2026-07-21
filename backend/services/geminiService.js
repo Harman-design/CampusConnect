@@ -274,7 +274,7 @@ async function generateAIContent(resourceId, operation) {
   }
 
   const geminiApiKey = process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.trim() : '';
-  const geminiModelName = process.env.GEMINI_MODEL || 'gemini-1.5-flash';
+  const geminiModelName = process.env.GEMINI_MODEL || 'gemini-3.6-flash';
   const isMockKey = !geminiApiKey || geminiApiKey === 'your_gemini_api_key';
 
   if (!isMockKey) {
@@ -330,7 +330,7 @@ async function generateAIContent(resourceId, operation) {
 
 async function chat(history, message, systemPersona) {
   const geminiApiKey = process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.trim() : '';
-  const geminiModelName = process.env.GEMINI_MODEL || 'gemini-1.5-flash';
+  const geminiModelName = process.env.GEMINI_MODEL || 'gemini-3.6-flash';
   const isMockKey = !geminiApiKey || geminiApiKey === 'your_gemini_api_key';
 
   if (!isMockKey) {
@@ -360,7 +360,7 @@ async function chat(history, message, systemPersona) {
 
 async function generateJSON(systemInstruction, userPrompt) {
   const geminiApiKey = process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.trim() : '';
-  const geminiModelName = process.env.GEMINI_MODEL || 'gemini-1.5-flash';
+  const geminiModelName = process.env.GEMINI_MODEL || 'gemini-3.6-flash';
   const isMockKey = !geminiApiKey || geminiApiKey === 'your_gemini_api_key';
 
   if (!isMockKey) {
