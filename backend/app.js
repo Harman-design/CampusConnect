@@ -42,6 +42,15 @@ if (process.env.NODE_ENV !== 'test') {
   app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 }
 
+app.get('/', (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: 'CampusConnect Backend API is running.',
+    healthCheck: '/api/health',
+    timestamp: new Date().toISOString(),
+  });
+});
+
 app.get('/api/health', (req, res) => {
   res.status(200).json({ success: true, message: 'CampusConnect API is healthy.', timestamp: new Date().toISOString() });
 });
